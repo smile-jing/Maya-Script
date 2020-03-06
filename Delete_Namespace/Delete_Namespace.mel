@@ -1,0 +1,53 @@
+global proc Delete_All_NameSpace(){
+//列出所有namespace
+string $getAllNS[] = `namespaceInfo -recurse -listOnlyNamespaces`;
+print $getAllNS;
+print (size($getAllNS)+"_");
+//遍历列表$getAllNS
+for($oneNS = size($getAllNS)-1;$oneNS >= 0;$oneNS--){
+    //排除无关紧要的namespace
+    if($getAllNS[$oneNS] != "UI" && $getAllNS[$oneNS] != "shared"){
+        namespace -mergeNamespaceWithParent -removeNamespace $getAllNS[$oneNS];
+        print ($getAllNS[$oneNS]+"\n");
+    }
+    else{
+        continue;
+    }
+}
+New_namespaceList;
+}
+//更新namespacelist
+global proc New_namespaceList(){
+textScrollList -e -ra "manespaceListWin";
+string $getAllNS[] = `namespaceInfo -recurse -listOnlyNamespaces`;
+for($i=0;$i<size($getAllNS);$i++)
+     {
+        if($getAllNS[$i] != "UI" && $getAllNS[$i] != "shared"){
+            textScrollList -e -append $getAllNS[$i] "manespaceListWin";
+        }
+        else{
+            continue;
+        }
+       
+     }
+}
+string $window = `window -title "Delete_NameSpace"
+       -iconName "delete_nameSpace"
+       -widthHeight 300 200 -menuBar 1`;
+columnLayout -adjustableColumn true;
+frameLayout -l "删除namespace" first;
+    menu -label "Help" -helpMenu true;
+    menuItem -label "作者：小静儿";
+    textScrollList -h 130 "manespaceListWin";
+setParent ..;
+rowLayout -nc 2 ;
+    button -label "Acquire" -w 150 -c New_namespaceList;
+    button -label "Delete" -w 150 -c Delete_All_NameSpace;
+setParent ..;
+showWindow $window;
+New_namespaceList;
+//
+//作者：小静儿
+//QQ1181434685
+//
+//
