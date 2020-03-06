@@ -1,0 +1,28 @@
+if(`window -ex DeleteUvSetWindow`) deleteUI  -window DeleteUvSetWindow;
+string $window = `window -title "清除Uv层"
+       -iconName "deleteuvset"
+       -widthHeight 200 55 "DeleteUvSetWindow"`;
+columnLayout -adjustableColumn true;
+       text "选择要清理Uv层的物体";
+       text "支持多选";
+       button -l "Apply" -c Delete_UvSet ;
+setParent ..;
+
+global proc Delete_UvSet(){
+    string $selobjs[] = `ls -sl`;
+    for($i = 0;$i<size($selobjs);$i++){
+        //复制当前使用的uv蹭到map1
+        polyCopyUV -uvSetNameInput "" -uvSetName "map1" $selobjs[$i] ;
+        //获取所有uv层排除map1
+        select -r $selobjs[$i];
+        string $AllUvSet[] = `polyUVSet -q -auv`;
+        string $items[] = { "map1" };
+        string $AllUvSet[] = stringArrayRemove($items,$AllUvSet);
+        //删除
+        for($j = 0;$j<size($AllUvSet);$j++){
+            polyUVSet -d -uvs $AllUvSet[$j];
+        }
+    }
+}
+
+showWindow $window;
