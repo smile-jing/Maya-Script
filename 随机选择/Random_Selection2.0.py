@@ -43,7 +43,7 @@ def Help_Message():
     cmds.columnLayout( adjustableColumn=True )
     cmds.text( label='该脚本主要功能是对选择的点、线、面、或者物体进行随机筛选\n\n修复了：使用后模型没法选中、选中后出现报错或者出现警告bug\n' )
     cmds.text(bgc=(0.5,0.5,0),label='注意' )
-    cmds.text( label='使用该脚本后出现模型没法选中、\n选中后出现报错或者出现警告\n运行脚本help菜单下的clean\n\n虽然修复了，但是保留这个功能\n\nmade vs：小静\nQQ：1181434685' )
+    cmds.text( label='\n选中后出现报错或者出现警告\n运行脚本help菜单下的clean\n\nmade vs：小静\nQQ：1181434685' )
     cmds.showWindow()
 def Button_Color(but_on,but_off,On_or_Off):
     if On_or_Off=='On':
