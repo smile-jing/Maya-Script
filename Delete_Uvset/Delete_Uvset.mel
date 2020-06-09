@@ -11,7 +11,7 @@ setParent ..;
 global proc Delete_UvSet(){
     string $selobjs[] = `ls -sl`;
     for($i = 0;$i<size($selobjs);$i++){
-        //复制当前使用的uv蹭到map1
+        //复制当前使用的uv层到map1
         polyCopyUV -uvSetNameInput "" -uvSetName "map1" $selobjs[$i] ;
         //获取所有uv层排除map1
         select -r $selobjs[$i];
