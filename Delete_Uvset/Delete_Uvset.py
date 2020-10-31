@@ -14,10 +14,13 @@ def Delete_UvsetApply():
                     cmds.polyUVSet(item,d=1,uvs=uvset)
             if renamecheckbox:
                 cmds.polyUVSet(e=1,rn=1,uvs=firstUvSet,nuv="map1")
-
+def Help_Message():
+    cmds.confirmDialog( title='Help_Message', message=u'作者：smile~小静儿\nQQ：1181434685\n个人博客：smilejing.cn', button=[u'关闭'] )
 # Make a new window
 #
-window = cmds.window( title=u"删除Uv层", iconName='Short Name', widthHeight=(300, 100) )
+window = cmds.window( title=u"删除Uv层", iconName='Short Name', widthHeight=(300, 120),menuBar=True )
+cmds.menu( label='Help', helpMenu=True )
+cmds.menuItem( label='Message',i='advancedSettings.png',c='Help_Message()')
 cmds.columnLayout( adjustableColumn=True )
 cmds.text(l=u"选择要清理Uv层的物体")
 cmds.text(l=u"支持多选")
